@@ -10,7 +10,7 @@ html,body {
 h1 {
     text-align: center;
 }
-#minilogo-canvas {
+#my-dmodel-canvas {
     display: block;
     margin: 8px auto;
     text-align: center;
@@ -22,7 +22,7 @@ footer {
     margin-bottom: 16px;
 }
 @media(max-width: 1000px) {
-    #minilogo-canvas {
+    #my-dmodel-canvas {
         margin-top: 32px;
     }
 }

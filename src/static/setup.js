@@ -40,18 +40,9 @@ editorConfig.setMonarchTokensProvider({
 });
 
 editorConfig.setMainCode(`
-def test() {
-    move(100, 0)
-    pen(down)
-    move(100, 100)
-    move(-100, 100)
-    move(-100, -100)
-    move(100, -100)
-    pen(up)
-}
-color(white)
-test()
-
+person Christian
+person Sebastian
+Hello Christian!
 `);
 
 
@@ -64,7 +55,7 @@ console.log(workerURL.href);
 
 const lsWorker = new Worker(workerURL.href, {
     type: 'classic',
-    name: 'MiniLogo Language Server'
+    name: 'My Domainmodel Language Server'
 });
 client.setWorker(lsWorker);
 
