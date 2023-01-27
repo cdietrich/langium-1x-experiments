@@ -10,3 +10,9 @@ run cli
 ```
 ./bin/cli generate  example/a.dmodel
 ```
+
+build vscode extension
+
+```
+vsce package
+```
