@@ -2,6 +2,7 @@
     "name": "my-domainmodel",
     "displayName": "my-domainmodel",
     "description": "Please enter a brief description here",
+    "publisher": "Christian Dietrich",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.56.0"
@@ -44,8 +45,10 @@
     },
     "main": "./out/extension.js",
     "scripts": {
-        "vscode:prepublish": "npm run esbuild-base -- --minify && npm run lint",
-        "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+        "vscode:prepublish": "npm run langium:generate && npm run build:extension && npm run lint",
+        "build:extension": "npm run esbuild:extension && npm run esbuild:ls",
+        "esbuild:extension": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node",
+        "esbuild:ls": "esbuild ./src/language-server/main.ts --bundle --outfile=out/language-server/main.js --format=cjs --platform=node",
         "esbuild": "npm run esbuild-base -- --sourcemap",
         "lint": "eslint src --ext ts",
         "build": "tsc -b tsconfig.json",

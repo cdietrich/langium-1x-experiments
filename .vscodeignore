@@ -4,3 +4,4 @@
 langium-quickstart.md
 *.jpg
 examples
+node_modules
