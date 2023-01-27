@@ -1,0 +1,15 @@
+{
+    "projectName": "MyDomainmodel",
+    "languages": [{
+        "id": "my-domainmodel",
+        "grammar": "src/language-server/my-domainmodel.langium",
+        "fileExtensions": [".dmodel"],
+        "textMate": {
+            "out": "syntaxes/my-domainmodel.tmLanguage.json"
+        },
+        "monarch": {
+            "out": "syntaxes/my-domainmodel.monarch.ts"
+        }
+    }],
+    "out": "src/language-server/generated"
+}

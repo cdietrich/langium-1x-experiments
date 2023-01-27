@@ -1,0 +1,57 @@
+{
+  "name": "my-domainmodel",
+  "scopeName": "source.my-domainmodel",
+  "fileTypes": [
+    ".dmodel"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "keyword.control.my-domainmodel",
+      "match": "\\b(Hello|person)\\b"
+    },
+    {
+      "name": "string.quoted.double.my-domainmodel",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "string.quoted.single.my-domainmodel",
+      "begin": "'",
+      "end": "'"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.my-domainmodel",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.my-domainmodel"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.my-domainmodel"
+            }
+          }
+        },
+        {
+          "begin": "//",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.my-domainmodel"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.my-domainmodel"
+        }
+      ]
+    }
+  }
+}
