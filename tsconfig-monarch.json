@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "esnext",
+    "sourceMap": true,
+    "outDir": "src/static/",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "include": [
+     "syntaxes/my-domainmodel.monarch.ts"
+  ],
+  "exclude": [
+     "out",
+     "node_modules"
+  ]
+}

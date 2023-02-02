@@ -1,5 +1,6 @@
 import { MonacoEditorLanguageClientWrapper } from './monaco-editor-wrapper/index.js';
 import { buildWorkerDefinition } from "./monaco-editor-workers/index.js";
+import mo from './my-domainmodel.monarch.js'
 
 buildWorkerDefinition('./monaco-editor-workers/workers', new URL('', window.location.href).href, false);
 
@@ -9,35 +10,7 @@ const client = new MonacoEditorLanguageClientWrapper();
 const editorConfig = client.getEditorConfig();
 editorConfig.setMainLanguageId('my-domainmodel');
 
-editorConfig.setMonarchTokensProvider({
-    keywords: [
-        'datatype','entity','extends','many','package'
-    ],
-    operators: [
-        ':','.'
-    ],
-    symbols:  /:|\.|\{|\}/,
-
-    tokenizer: {
-        initial: [
-            { regex: /[_a-zA-Z][\w_]*/, action: { cases: { '@keywords': {"token":"keyword"}, '@default': {"token":"ID"} }} },
-            { regex: /[0-9]+/, action: {"token":"number"} },
-            { regex: /"[^"]*"|'[^']*'/, action: {"token":"string"} },
-            { include: '@whitespace' },
-            { regex: /@symbols/, action: { cases: { '@operators': {"token":"operator"}, '@default': {"token":""} }} },
-        ],
-        whitespace: [
-            { regex: /\s+/, action: {"token":"white"} },
-            { regex: /\/\*/, action: {"token":"comment","next":"@comment"} },
-            { regex: /\/\/[^\n\r]*/, action: {"token":"comment"} },
-        ],
-        comment: [
-            { regex: /[^\/\*]+/, action: {"token":"comment"} },
-            { regex: /\*\//, action: {"token":"comment","next":"@pop"} },
-            { regex: /[\/\*]/, action: {"token":"comment"} },
-        ],
-    }
-});
+editorConfig.setMonarchTokensProvider(mo);
 
 editorConfig.setMainCode(`
 datatype String
