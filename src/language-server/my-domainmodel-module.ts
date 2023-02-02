@@ -4,11 +4,17 @@ import {
 } from 'langium';
 import { MyDomainmodelGeneratedModule, MyDomainmodelGeneratedSharedModule } from './generated/module';
 import { MyDomainmodelValidator, registerValidationChecks } from './my-domainmodel-validator';
+import { MyDomainModelQualifiedNameProvider} from './my-domainmodel-naming'
+import { MyDomainModelScopeComputation } from './my-domainmodel-scope'
+import { MyDomainModelFormatter } from './my-domainmodel-formatter';
 
 /**
  * Declaration of custom services - add your own service classes here.
  */
 export type MyDomainmodelAddedServices = {
+    references: {
+        QualifiedNameProvider: MyDomainModelQualifiedNameProvider
+    }
     validation: {
         MyDomainmodelValidator: MyDomainmodelValidator
     }
@@ -26,8 +32,15 @@ export type MyDomainmodelServices = LangiumServices & MyDomainmodelAddedServices
  * selected services, while the custom services must be fully specified.
  */
 export const MyDomainmodelModule: Module<MyDomainmodelServices, PartialLangiumServices & MyDomainmodelAddedServices> = {
+    references: {
+        ScopeComputation: (services) => new MyDomainModelScopeComputation(services),
+        QualifiedNameProvider: () => new MyDomainModelQualifiedNameProvider()
+    },
     validation: {
         MyDomainmodelValidator: () => new MyDomainmodelValidator()
+    },
+    lsp: {
+        Formatter: () => new MyDomainModelFormatter()
     }
 };
 

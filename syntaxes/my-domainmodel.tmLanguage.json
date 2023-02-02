@@ -10,7 +10,7 @@
     },
     {
       "name": "keyword.control.my-domainmodel",
-      "match": "\\b(Hello|person)\\b"
+      "match": "\\b(datatype|entity|extends|many|package)\\b"
     },
     {
       "name": "string.quoted.double.my-domainmodel",

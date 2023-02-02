@@ -40,9 +40,10 @@ editorConfig.setMonarchTokensProvider({
 });
 
 editorConfig.setMainCode(`
-person Christian
-person Sebastian
-Hello Christian!
+datatype String
+entity Person {
+    name: String
+}
 `);
 
 

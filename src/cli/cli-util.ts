@@ -1,18 +1,18 @@
-import chalk from 'chalk';
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
 import { AstNode, LangiumDocument, LangiumServices } from 'langium';
 import { URI } from 'vscode-uri';
+import { WorkspaceFolder } from 'vscode-languageserver';
 
-export async function extractDocument(fileName: string, services: LangiumServices): Promise<LangiumDocument> {
-    const extensions = services.LanguageMetaData.fileExtensions;
+export async function extractDocument<T extends AstNode>(fileName: string, extensions: string[], services: LangiumServices): Promise<LangiumDocument<T>> {
     if (!extensions.includes(path.extname(fileName))) {
-        console.error(chalk.yellow(`Please choose a file with one of these extensions: ${extensions}.`));
+        console.error(chalk.yellow(`Please, choose a file with one of these extensions: ${extensions}.`));
         process.exit(1);
     }
 
     if (!fs.existsSync(fileName)) {
-        console.error(chalk.red(`File ${fileName} does not exist.`));
+        console.error(chalk.red(`File ${fileName} doesn't exist.`));
         process.exit(1);
     }
 
@@ -30,11 +30,25 @@ export async function extractDocument(fileName: string, services: LangiumService
         process.exit(1);
     }
 
-    return document;
+    return document as LangiumDocument<T>;
 }
 
-export async function extractAstNode<T extends AstNode>(fileName: string, services: LangiumServices): Promise<T> {
-    return (await extractDocument(fileName, services)).parseResult?.value as T;
+export async function extractAstNode<T extends AstNode>(fileName: string, extensions: string[], services: LangiumServices): Promise<T> {
+    return (await extractDocument(fileName, extensions, services)).parseResult.value as T;
+}
+
+export async function setRootFolder(services: LangiumServices, root?: string): Promise<void> {
+    if (!root) {
+        root = path.dirname(".");
+    }
+    if (!path.isAbsolute(root)) {
+        root = path.resolve(process.cwd(), root);
+    }
+    const folders: WorkspaceFolder[] = [{
+        name: path.basename(root),
+        uri: URI.file(root).toString()
+    }];
+    await services.shared.workspace.WorkspaceManager.initializeWorkspace(folders);
 }
 
 interface FilePathData {
