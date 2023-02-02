@@ -8,7 +8,7 @@ npm run serve
 run cli
 
 ```
-./bin/cli generate  example/a.dmodel
+./bin/cli generate -r example -d example/generated
 ```
 
 build vscode extension
