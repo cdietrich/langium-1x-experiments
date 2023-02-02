@@ -11,18 +11,18 @@ editorConfig.setMainLanguageId('my-domainmodel');
 
 editorConfig.setMonarchTokensProvider({
     keywords: [
-        'color','def','down','for','move','pen','to','up'
+        'datatype','entity','extends','many','package'
     ],
     operators: [
-        '-',',','*','/','+','='
+        ':','.'
     ],
-    symbols:  /-|,|\(|\)|\{|\}|\*|\/|\+|=/,
+    symbols:  /:|\.|\{|\}/,
 
     tokenizer: {
         initial: [
-            { regex: /#(\d|[a-fA-F])+/, action: {"token":"string"} },
-            { regex: /[_a-zA-Z][\w_]*/, action: { cases: { '@keywords': {"token":"keyword"}, '@default': {"token":"string"} }} },
-            { regex: /-?[0-9]+/, action: {"token":"number"} },
+            { regex: /[_a-zA-Z][\w_]*/, action: { cases: { '@keywords': {"token":"keyword"}, '@default': {"token":"ID"} }} },
+            { regex: /[0-9]+/, action: {"token":"number"} },
+            { regex: /"[^"]*"|'[^']*'/, action: {"token":"string"} },
             { include: '@whitespace' },
             { regex: /@symbols/, action: { cases: { '@operators': {"token":"operator"}, '@default': {"token":""} }} },
         ],
